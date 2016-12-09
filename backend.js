@@ -6,16 +6,11 @@ var io = require('socket.io')(http);
 app.use(express.static('public'));
 
 io.on('connection', function(socket) {
-  console.log('logged in');
   socket.on('draw', function(coords) {
     console.log(coords);
     io.emit('sent draw', coords);
   });
 });
-
-
-
-
 
 
 http.listen(8000, function() {
