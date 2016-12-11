@@ -14,8 +14,6 @@ var pen = 5;
 //   coords = [x, y];
 // };
 drawLine = function(x,y, color, pen) {
-  console.log('this is the color, ', color);
-  console.log(x, y);
   ctx.strokeStyle = color;
   ctx.lineJoin = 'round';
   ctx.lineWidth = pen;
@@ -28,7 +26,7 @@ drawLine = function(x,y, color, pen) {
 
 $('#canvas').on('mousemove', function(poopevent) {
   mousePosition = {x: poopevent.pageX, y: poopevent.pageY};
-  if (lastMousePosition && mousebool) {
+  if (lastMousePosition.length > 0 && mousebool) {
     drawLine(lastMousePosition, mousePosition, color, pen);
     socket.emit('draw', [lastMousePosition, mousePosition, color, pen]);
   }
@@ -45,7 +43,7 @@ $('#canvas').on('mouseup', function(poopevent) {
 });
 
 $('.btn').on('click', function(click) {
-  color = click.target.name
+  color = click.target.name;
 });
 
 $('.btn5').on('click', function(click) {
@@ -58,7 +56,6 @@ $('.btn5').on('click', function(click) {
 });
 
 $('.submit1').on('input', function(input) {
-  console.log(input.target.valueAsNumber);
   pen = input.target.valueAsNumber;
 });
 

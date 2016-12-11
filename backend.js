@@ -7,12 +7,10 @@ app.use(express.static('public'));
 
 io.on('connection', function(socket) {
   socket.on('draw', function(coords) {
-    console.log(coords);
     io.emit('sent draw', coords);
   });
 });
 
-
 http.listen(8000, function() {
-  console.log('listening 8000')
-})
+  console.log('listening 8000');
+});
