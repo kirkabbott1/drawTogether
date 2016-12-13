@@ -6,6 +6,7 @@ var mousebool = false;
 var lastMousePosition = [];
 var color = 'black';
 var pen = 5;
+// var hist = [];
 // drawCircle = function(x,y) {
 //   ctx.beginPath();
 //   ctx.fillStyle = 'blue';
@@ -32,6 +33,7 @@ $('#canvas').on('mousemove', function(poopevent) {
   }
   lastMousePosition[0] = mousePosition.x;
   lastMousePosition[1] = mousePosition.y;
+  // hist.push({x: lastMousePosition[0], y: lastMousePosition[1], color: color, pen: pen});
 });
 
 $('#canvas').on('mousedown', function(poopevent) {
@@ -62,6 +64,17 @@ $('.submit1').on('input', function(input) {
 $('.eraser').on('click', function(click) {
   color = 'white';
   pen = 25;
+});
+
+socket.on("drawHist", function(coords) {
+  coords.forEach(function(coord) {
+    drawLine(coord[0], coord[1], coord[2], coord[3]);
+  });
+  //
+  // for(var i = 0; i< coords.length; i++) {
+  //   console.log('drawhist coords', coords);
+  //}
+
 });
 
 socket.on('sent draw', function(coords) {
